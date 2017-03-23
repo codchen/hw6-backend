@@ -2,7 +2,7 @@ import { expect } from 'chai'
 import { resource } from './ajax'
 
 // Constants
-const loggedInUser = 'Tony'
+const loggedInUser = 'xc12'
 const user = 'Alice'
 const anotherUser = 'Seb'
 const newData = {

@@ -1,7 +1,7 @@
 // Handles all profile-related requests
 
 // Constants
-const loggedInUser = 'Tony'
+const loggedInUser = 'xc12'
 
 const profiles = [
 	{
@@ -20,7 +20,7 @@ const profiles = [
 		avatar: 'a2',
 		dob: 456
 	},{
-		username: 'Tony',
+		username: 'xc12',
 		headline: 'old',
 		email: 'e@f',
 		zipcode: 77005,
@@ -52,15 +52,23 @@ const getCollection = (type) => (req, res) => {
 const getItem = (type) => (req, res) => {
 	const user = req.params.user !== undefined ? req.params.user : loggedInUser
 	const p = profiles.find((p) => p.username === user)
-	res.send(extract(type)(p))
+	if (p === undefined) {
+		return res.status(404).send('User not found')
+	} else {
+		return res.send(extract(type)(p))
+	}
 }
 
 // Template PUT handler for non-array responses
 const putItem = (type) => (req, res) => {
 	const input = req.body[type]
 	const p = profiles.find((p) => p.username === loggedInUser)
-	p[type] = input
-	res.send(extract(type)(p))
+	if (p === undefined) {
+		return res.status(404).send('User not found')
+	} else {
+		p[type] = input
+		return res.send(extract(type)(p))
+	}
 }
 
 module.exports = app => {
