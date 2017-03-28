@@ -32,10 +32,13 @@ const validateCommentFormat = (comments) => {
 }
 
 // Validate persistency of data previously PUT/POSTed
-const validatePersistency = (text, postId, commentId) =>
+const validatePersistency = (text, postId, postCnt, commentId) =>
 	resource('GET', 'articles')
 		.then((body) => {
 			validateArticleFormat(body.articles)
+			if (postCnt != -1) {
+				expect(body.articles.length).to.equal(postCnt)
+			}
 			const posts = body.articles.filter((article) => article._id === postId)
 			expect(posts.length).to.equal(1)
 			if (commentId !== undefined) {
@@ -51,8 +54,9 @@ const validatePersistency = (text, postId, commentId) =>
 describe('Test Articles Stubs', () => {
 	it('should GET all articles', (done) => {
 		resource('GET', 'articles')
-			.then((body) =>
-				validateArticleFormat(body.articles))
+			.then((body) => {
+				validateArticleFormat(body.articles)
+			})
 			.then(done)
 			.catch(done)
 	})
@@ -91,7 +95,7 @@ describe('Test Articles Stubs', () => {
 				expect(body.articles[0].author).to.be.equal(loggedInUser)
 				expect(body.articles[0]._id).to.be.equal(postId)
 				expect(body.articles[0].text).to.be.equal(newText)
-				return validatePersistency(newText, postId)
+				return validatePersistency(newText, postId, -1)
 			})
 			.then(done)
 			.catch(done)
@@ -122,7 +126,7 @@ describe('Test Articles Stubs', () => {
 				expect(editted.length).to.equal(1)
 				expect(editted[0].author).to.equal(loggedInUser)
 				expect(editted[0].text).to.equal(commentEdition)
-				return validatePersistency(commentEdition, notOwnedPostId, commentId)
+				return validatePersistency(commentEdition, notOwnedPostId, -1, commentId)
 			})
 			.then(done)
 			.catch(done)
@@ -144,7 +148,7 @@ describe('Test Articles Stubs', () => {
 				const latest = comments.reduce((result, comment) =>
 					(new Date(result.date)) < (new Date(comment.date)) ?
 						comment : result)
-				return validatePersistency(newComment, notOwnedPostId, latest.commentId)
+				return validatePersistency(newComment, notOwnedPostId, -1, latest.commentId)
 			})
 			.then(done)
 			.catch(done)
@@ -164,16 +168,20 @@ describe('Test Articles Stubs', () => {
 	})
 
 	const newPost = 'hello world'
-	it('should post a new article', (done) => {
-		resource('POST', 'article', { text: newPost })
-			.then((body) => {
-				validateArticleFormat(body.articles)
-				expect(body.articles.length).to.equal(1)
-				expect(body.articles[0].author).to.equal(loggedInUser)
-				expect(body.articles[0].text).to.equal(newPost)
-				return validatePersistency(newPost, body.articles[0]._id)
+	it('should POST a new article', (done) => {
+		resource('GET', 'articles')
+			.then((body) => body.articles.length)
+			.then((postCnt) => {
+				resource('POST', 'article', { text: newPost })
+					.then((body) => {
+						validateArticleFormat(body.articles)
+						expect(body.articles.length).to.equal(1)
+						expect(body.articles[0].author).to.equal(loggedInUser)
+						expect(body.articles[0].text).to.equal(newPost)
+						return validatePersistency(newPost, body.articles[0]._id, postCnt + 1)
+					})
+					.then(done)
+					.catch(done)
 			})
-			.then(done)
-			.catch(done)
 	})
 })
