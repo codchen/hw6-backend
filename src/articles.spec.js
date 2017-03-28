@@ -39,10 +39,12 @@ const validatePersistency = (text, postId, postCnt, commentId) =>
 			if (postCnt != -1) {
 				expect(body.articles.length).to.equal(postCnt)
 			}
-			const posts = body.articles.filter((article) => article._id === postId)
+			const posts = body.articles.filter((article) => 
+				article._id === postId)
 			expect(posts.length).to.equal(1)
 			if (commentId !== undefined) {
-				const comments = posts[0].comments.filter((comment) => comment.commentId === commentId)
+				const comments = posts[0].comments.filter(
+					(comment) => comment.commentId === commentId)
 				expect(comments.length).to.equal(1)
 				expect(comments[0].text).to.equal(text)
 			} else {
@@ -116,17 +118,21 @@ describe('Test Articles Stubs', () => {
 
 	const commentId = 0
 	const commentEdition = 'abc'
-	it(`should PUT edit to a comment of ID ${commentId} of article ID ${notOwnedPostId}`, (done) => {
-		resource('PUT', `articles/${notOwnedPostId}`, { text: commentEdition, commentId })
+	it(`should PUT edit to a comment of ID ${commentId} of article ID 
+		${notOwnedPostId}`, (done) => {
+		resource('PUT', `articles/${notOwnedPostId}`, 
+			{ text: commentEdition, commentId })
 			.then((body) => {
 				validateArticleFormat(body.articles)
 				expect(body.articles.length).to.equal(1)
 				expect(body.articles[0]._id).to.be.equal(notOwnedPostId)
-				const editted = body.articles[0].comments.filter((comment) => comment.commentId === commentId)
+				const editted = body.articles[0].comments.filter(
+					(comment) => comment.commentId === commentId)
 				expect(editted.length).to.equal(1)
 				expect(editted[0].author).to.equal(loggedInUser)
 				expect(editted[0].text).to.equal(commentEdition)
-				return validatePersistency(commentEdition, notOwnedPostId, -1, commentId)
+				return validatePersistency(
+					commentEdition, notOwnedPostId, -1, commentId)
 			})
 			.then(done)
 			.catch(done)
@@ -134,7 +140,8 @@ describe('Test Articles Stubs', () => {
 
 	const newComment = 'def'
 	it(`should PUT a new comment on article ID ${notOwnedPostId}`, (done) => {
-		resource('PUT', `articles/${notOwnedPostId}`, { text: newComment, commentId: -1 })
+		resource('PUT', `articles/${notOwnedPostId}`, 
+			{ text: newComment, commentId: -1 })
 			.then((body) => {
 				validateArticleFormat(body.articles)
 				expect(body.articles.length).to.equal(1)
@@ -148,7 +155,8 @@ describe('Test Articles Stubs', () => {
 				const latest = comments.reduce((result, comment) =>
 					(new Date(result.date)) < (new Date(comment.date)) ?
 						comment : result)
-				return validatePersistency(newComment, notOwnedPostId, -1, latest.commentId)
+				return validatePersistency(
+					newComment, notOwnedPostId, -1, latest.commentId)
 			})
 			.then(done)
 			.catch(done)
@@ -156,7 +164,8 @@ describe('Test Articles Stubs', () => {
 
 	const notOwnedCommentId = 0
 	it('should not PUT edit to a comment not owned', (done) => {
-		resource('PUT', `articles/${postId}`, { text: newText, commentId: notOwnedCommentId })
+		resource('PUT', `articles/${postId}`, 
+			{ text: newText, commentId: notOwnedCommentId })
 			.then(() => {
 				throw new Error(-1)
 			})
@@ -178,7 +187,8 @@ describe('Test Articles Stubs', () => {
 						expect(body.articles.length).to.equal(1)
 						expect(body.articles[0].author).to.equal(loggedInUser)
 						expect(body.articles[0].text).to.equal(newPost)
-						return validatePersistency(newPost, body.articles[0]._id, postCnt + 1)
+						return validatePersistency(
+							newPost, body.articles[0]._id, postCnt + 1)
 					})
 					.then(done)
 					.catch(done)

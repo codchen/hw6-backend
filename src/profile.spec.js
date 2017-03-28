@@ -7,7 +7,8 @@ const user = 'Alice'
 const anotherUser = 'Seb'
 const newData = {
 	headline: 'new headline',
-	avatar: 'https://webdev-dummy.herokuapp.com/img/owl.png-' + new Date().getTime(),
+	avatar: 'https://webdev-dummy.herokuapp.com/img/owl.png-' + 
+		new Date().getTime(),
 	email: 'xc12@rice.edu',
 	zipcode: 77005
 }

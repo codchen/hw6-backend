@@ -4,6 +4,7 @@
 const username = 'Tony'
 
 // Handlers
+// GET handler -> /following
 const getFollowing = (req, res) => {
 	return res.send({
 		username,
@@ -11,6 +12,7 @@ const getFollowing = (req, res) => {
 	})
 }
 
+// PUT handler -> /following
 const putFollowing = (req, res) => {
 	return res.send({
 		username,
@@ -18,6 +20,7 @@ const putFollowing = (req, res) => {
 	})
 }
 
+// DELETE handler -> /following
 const deleteFollowing = (req, res) => {
 	return res.send({
 		username,
