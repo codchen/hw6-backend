@@ -19,7 +19,7 @@ const validateCollection = (type) => {
 	it(`should GET ${type}`, (done) => {
 		resource('GET', plural).then((body) => {
 			expect(body[plural]).to.be.an('array')
-			expect(body[plural].length).to.be.at.least(1)
+			expect(body[plural].length).to.equal(1)
 			body[plural].forEach((item) => {
 				expect(item.username).to.be.a('string')
 				expect(item[type]).to.be.a('string')

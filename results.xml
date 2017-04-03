@@ -1,27 +1,27 @@
-<testsuite name="Mocha Tests" tests="24" failures="0" errors="0" skipped="0" timestamp="Tue, 28 Mar 2017 18:31:18 GMT" time="0.183">
-<testcase classname="Test Articles Stubs" name="should GET all articles" time="0.033"/>
-<testcase classname="Test Articles Stubs" name="should GET all articles by Alice" time="0.007"/>
+<testsuite name="Mocha Tests" tests="24" failures="0" errors="0" skipped="0" timestamp="Mon, 03 Apr 2017 18:54:28 GMT" time="0.177">
+<testcase classname="Test Articles Stubs" name="should GET all articles" time="0.032"/>
+<testcase classname="Test Articles Stubs" name="should GET all articles by Alice" time="0.008"/>
 <testcase classname="Test Articles Stubs" name="should GET all articles of post ID 0" time="0.003"/>
-<testcase classname="Test Articles Stubs" name="should PUT edit to article of post ID 0" time="0.023"/>
-<testcase classname="Test Articles Stubs" name="should not PUT edit to an article not owned" time="0.003"/>
+<testcase classname="Test Articles Stubs" name="should PUT edit to article of post ID 0" time="0.026"/>
+<testcase classname="Test Articles Stubs" name="should not PUT edit to an article not owned" time="0.004"/>
 <testcase classname="Test Articles Stubs" name="should PUT edit to a comment of ID 0 of article ID 
-		1" time="0.005"/>
-<testcase classname="Test Articles Stubs" name="should PUT a new comment on article ID 1" time="0.006"/>
-<testcase classname="Test Articles Stubs" name="should not PUT edit to a comment not owned" time="0.003"/>
+		1" time="0.007"/>
+<testcase classname="Test Articles Stubs" name="should PUT a new comment on article ID 1" time="0.007"/>
+<testcase classname="Test Articles Stubs" name="should not PUT edit to a comment not owned" time="0.002"/>
 <testcase classname="Test Articles Stubs" name="should POST a new article" time="0.006"/>
 <testcase classname="Test Profile Stubs" name="should GET headline" time="0.002"/>
-<testcase classname="Test Profile Stubs" name="should GET headline for a user" time="0.003"/>
+<testcase classname="Test Profile Stubs" name="should GET headline for a user" time="0.002"/>
 <testcase classname="Test Profile Stubs" name="should GET headlines for multiple users" time="0.003"/>
 <testcase classname="Test Profile Stubs" name="should PUT headline and persist" time="0.004"/>
 <testcase classname="Test Profile Stubs" name="should GET avatar" time="0.002"/>
 <testcase classname="Test Profile Stubs" name="should GET avatar for a user" time="0.002"/>
 <testcase classname="Test Profile Stubs" name="should GET avatars for multiple users" time="0.002"/>
-<testcase classname="Test Profile Stubs" name="should PUT avatar and persist" time="0.004"/>
+<testcase classname="Test Profile Stubs" name="should PUT avatar and persist" time="0.005"/>
 <testcase classname="Test Profile Stubs" name="should GET email" time="0.002"/>
-<testcase classname="Test Profile Stubs" name="should GET email for a user" time="0.001"/>
-<testcase classname="Test Profile Stubs" name="should PUT email and persist" time="0.005"/>
+<testcase classname="Test Profile Stubs" name="should GET email for a user" time="0.002"/>
+<testcase classname="Test Profile Stubs" name="should PUT email and persist" time="0.006"/>
 <testcase classname="Test Profile Stubs" name="should GET zipcode" time="0.002"/>
-<testcase classname="Test Profile Stubs" name="should GET zipcode for a user" time="0.002"/>
-<testcase classname="Test Profile Stubs" name="should PUT zipcode and persist" time="0.004"/>
+<testcase classname="Test Profile Stubs" name="should GET zipcode for a user" time="0.003"/>
+<testcase classname="Test Profile Stubs" name="should PUT zipcode and persist" time="0.003"/>
 <testcase classname="Test Profile Stubs" name="should GET date of birth" time="0.003"/>
 </testsuite>

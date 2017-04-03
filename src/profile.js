@@ -44,6 +44,8 @@ const getCollection = (type) => (req, res) => {
 	if (req.params.user !== undefined) {
 		const users = req.params.user.split(',')
 		payload[key] = payload[key].filter((p) => users.includes(p.username))
+	} else {
+		payload[key] = payload[key].filter((p) => [loggedInUser].includes(p.username))
 	}
 	res.send(payload)
 }
